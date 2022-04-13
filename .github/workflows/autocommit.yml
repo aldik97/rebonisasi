@@ -22,9 +22,11 @@ jobs:
         run: |
           d=`date '+%Y-%m-%dT%H:%M:%SZ'`
           echo $d > LAST_UPDATED
+          git config --global --add safe.directory /github/workspace
           
       - name: Commit changes
         run: |
+          git config --global --add safe.directory /github/workspace
           git config --local user.email "aldikh.ak@gmail.com"
           git config --local user.name "aldik97"
           git add -A
@@ -45,6 +47,8 @@ jobs:
           git commit -m "${arr[$rand]}"
           
       - name: GitHub Push
+        run : |
+          git config --global --add safe.directory /github/workspace
         uses: ad-m/github-push-action@v0.5.0
         with:
           force: true
